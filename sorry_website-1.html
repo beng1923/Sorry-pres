@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open When You're Ready 🤍</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; display:flex; justify-content:center; align-items:center;
+    font-family:Arial,sans-serif; color:#4b4145;
+    background:linear-gradient(135deg,#fff8f8,#f9eff5);
+    overflow:hidden;
+  }
+  .hearts span{position:fixed; font-size:18px; opacity:.45; animation:float 7s linear infinite;}
+  .hearts span:nth-child(1){left:8%;top:75%;animation-delay:0s}
+  .hearts span:nth-child(2){left:85%;top:20%;animation-delay:2s}
+  .hearts span:nth-child(3){left:18%;top:15%;animation-delay:4s}
+  .hearts span:nth-child(4){left:75%;top:80%;animation-delay:1s}
+  @keyframes float{0%{transform:translateY(30px);opacity:0}20%{opacity:.5}100%{transform:translateY(-180px);opacity:0}}
+  .card{
+    width:min(92%,430px); min-height:560px; padding:34px 28px; border-radius:28px;
+    background:rgba(255,255,255,.78); backdrop-filter:blur(12px);
+    box-shadow:0 18px 50px rgba(112,76,91,.12); text-align:center;
+    display:flex; flex-direction:column; justify-content:center; position:relative;
+  }
+  .page{display:none; animation:fade .65s ease}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;opacity:.6}
+  h1{font-family:Georgia,serif;font-size:39px;margin:14px 0;color:#493d42}
+  h2{font-family:Georgia,serif;font-size:30px;margin:12px 0}
+  p{font-size:16px;line-height:1.7}
+  .envelope{font-size:92px;margin:25px 0 10px;transition:.3s}
+  .envelope.open{transform:rotate(-4deg) scale(1.08)}
+  button{
+    border:0;border-radius:999px;padding:14px 22px;margin:8px;
+    background:#ead1dc;color:#4b3c43;font-size:15px;font-weight:600;
+    cursor:pointer;box-shadow:0 7px 18px rgba(110,70,90,.12);
+    transition:.2s;
+  }
+  button:hover{transform:translateY(-2px);background:#e3c1d0}
+  .message{text-align:left;margin-top:20px}
+  .message p{margin:12px 0}
+  .small{font-size:13px;opacity:.62}
+  .popup{margin-top:14px;min-height:45px;font-size:14px;line-height:1.5}
+  .final{font-family:Georgia,serif;font-size:24px;line-height:1.5;margin:25px 0}
+</style>
+</head>
+<body>
+<div class="hearts"><span>♡</span><span>✦</span><span>♡</span><span>✧</span></div>
+
+<main class="card">
+  <section class="page active" id="p1">
+    <div class="eyebrow">a little something for you</div>
+    <div class="envelope" id="env">💌</div>
+    <h1>Open when you're ready.</h1>
+    <p>I know you're probably still mad… but I wanted to say something.</p>
+    <button onclick="openPage(2)">open it 🤍</button>
+  </section>
+
+  <section class="page" id="p2">
+    <div class="eyebrow">from me, sincerely</div>
+    <h2>I'm genuinely sorry.</h2>
+    <div class="message">
+      <p>I know it may have seemed like I wasn't acknowledging my mistake, but I really do.</p>
+      <p>I've had time to think about what happened, and honestly, I regret how I handled it. I know I should've acknowledged my mistake better instead of letting you feel like I didn't care.</p>
+      <p>I'm not making this just to make things normal again. I'm saying this because I genuinely reflected on what I did, and I'm truly sorry.</p>
+      <p>I won't pressure you to forgive me or expect you to be okay immediately. Take your time.</p>
+      <p>I just hope that, when you're ready, you'll talk to me again.</p>
+      <p><b>I really mean it. 🤍</b></p>
+    </div>
+    <button onclick="openPage(3)">one last thing →</button>
+  </section>
+
+  <section class="page" id="p3">
+    <div class="eyebrow">okay, last one</div>
+    <h2>Just so you know…</h2>
+    <p>Whatever you decide, I respect your space. I just hope we can be okay again someday.</p>
+    <button onclick="saySorry()">I'm sorry</button>
+    <button onclick="meanIt()">I really mean it</button>
+    <button onclick="dontIgnore()">please don't ignore me forever 😭</button>
+    <div class="popup" id="popup"></div>
+    <button id="finish" style="display:none" onclick="openPage(4)">continue 🤍</button>
+  </section>
+
+  <section class="page" id="p4">
+    <div class="eyebrow">that's all</div>
+    <div class="final">Thank you for reading this. 🤍</div>
+    <p>I hope someday you'll be able to forgive me. Until then, I'll respect your space.</p>
+    <p class="small">made with sincerity, not pressure.</p>
+    <div style="font-size:28px;margin-top:18px">♡</div>
+  </section>
+</main>
+
+<script>
+function openPage(n){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+  if(n===2) document.getElementById('env').classList.add('open');
+}
+function saySorry(){
+  document.getElementById('popup').textContent="I really am. I hope you know that. 🤍";
+  document.getElementById('finish').style.display='inline-block';
+}
+function meanIt(){
+  document.getElementById('popup').textContent="I know words aren't enough, but I truly mean every word. 🥹";
+  document.getElementById('finish').style.display='inline-block';
+}
+function dontIgnore(){
+  document.getElementById('popup').textContent="Okay, okay 😭 I’ll give you your space. I just hope we’ll be okay someday.";
+  document.getElementById('finish').style.display='inline-block';
+}
+</script>
+</body>
+</html>
